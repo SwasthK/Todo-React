@@ -21,11 +21,14 @@ TodoRoutes.post("/todos", async (req, res) => {
             description,
         })
 
-        await addtodo.save()
-
-        res.status(201).json({
-            message: "REQUEST DONE POST"
+        await addtodo.save((err, doc) => {
+            if (err) {
+                return console.log(err);
+            }
+            res.status(200).json({ doc })
         })
+
+
     } catch (error) {
         res.status(411).json({
             message: "Todo Cannot be Added"
