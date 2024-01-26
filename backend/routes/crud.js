@@ -14,36 +14,34 @@ TodoRoutes.get('/todos', async (req, res) => {
 })
 
 TodoRoutes.post("/todos", async (req, res) => {
-    const { title, description } = req.body
+    const { title, description } = req.body;
+
     try {
         const addtodo = new Todo({
             title,
             description,
-        })
+        });
 
-        await addtodo.save((err, doc) => {
-            if (err) {
-                return console.log(err);
-            }
-            res.status(200).json({ doc })
-        })
-
+        const doc = await addtodo.save();
+        res.status(200).json({ doc });
 
     } catch (error) {
-        res.status(411).json({
-            message: "Todo Cannot be Added"
-        })
+        console.error(error);
+        res.status(500).json({ error: "Sorry something went wrong" });
     }
-})
+});
+
+
 
 TodoRoutes.delete('/todos/:id', async (req, res) => {
     const deleteId = req.params.id
     try {
-        await Todo.deleteOne({
+        const deleted = await Todo.deleteOne({
             _id: deleteId
         })
         res.status(200).json({
-            message: "REQUEST DONE DELETE"
+            message: "REQUEST DONE DELETE",
+            dlt: deleted
         })
     } catch (error) {
         res.status(411).json({
@@ -55,9 +53,9 @@ TodoRoutes.delete('/todos/:id', async (req, res) => {
 TodoRoutes.put('/todos/:id', async (req, res) => {
     const updateId = req.params.id
     const { completed } = req.body
-
+console.log(completed);
     const findtodo = await Todo.findOne({ _id: updateId })
-    if (!findOne) {
+    if (!findtodo) {
         return res.status(200).json({
             message: "Todo Cannot be found"
         })
@@ -65,13 +63,13 @@ TodoRoutes.put('/todos/:id', async (req, res) => {
     try {
         await Todo.updateOne({
             _id: updateId
-        }, { $set: { completed: !completed } })
+        }, { $set: { completed: completed } })
 
         res.status(200).json({
             message: "REQUEST DONE PUT"
         })
     } catch (error) {
-        res.status(411).json({
+        res.status(411).json({  
             message: "Todo Cannot be Updated"
         })
     }
