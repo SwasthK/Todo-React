@@ -1,8 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
-require("dotenv").config()
+require('dotenv').config()
 
-mongoose.connect("mongodb+srv://swasth319:0n3zjDv1KMXiDIok@cluster0.oqytlgg.mongodb.net/Mytodo")
+mongoose.connect(process.env.M_KEY)
 
     .then(() => {
         console.log("connected to db");
