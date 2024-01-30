@@ -8,7 +8,11 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 
 export const Todolist = ({ props, setupdate }) => {
   const [completed, setcompleted] = useState(false);
-  
+
+  // useEffect(() => {
+  //     console.log('done state changed:', done);
+  // }, [done]);
+
   const deletetodo = () => {
     axios
       .delete("http://localhost:3000/mytodo/api/v1/todos/" + props._id)
