@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 
 mongoose.connect(process.env.M_KEY)
-
     .then(() => {
         console.log("connected to db");
     })

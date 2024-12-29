@@ -32,7 +32,6 @@ TodoRoutes.post("/todos", async (req, res) => {
 });
 
 
-
 TodoRoutes.delete('/todos/:id', async (req, res) => {
     const deleteId = req.params.id
     try {
@@ -53,7 +52,6 @@ TodoRoutes.delete('/todos/:id', async (req, res) => {
 TodoRoutes.put('/todos/:id', async (req, res) => {
     const updateId = req.params.id
     const { completed } = req.body
-console.log(completed);
     const findtodo = await Todo.findOne({ _id: updateId })
     if (!findtodo) {
         return res.status(200).json({
