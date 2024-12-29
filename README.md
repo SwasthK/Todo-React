@@ -2,11 +2,16 @@
 
 ## Clone the Repository
 
-1. Clone the repo.
+1. Clone the repo:
+   Head over to the terminal, choose your preferred directory, and copy and paste the following command:
+   - Using HTTPS: `git clone https://github.com/SwasthK/Todo-React.git`
+   - Using SSH: `git clone git@github.com:SwasthK/Todo-React.git`
+
 2. Navigate to the project directory:
    ```sh
-   cd TODO-React
+   cd Todo-React
    ```
+
 3. Open it in your code editor.
 
 ## Backend Setup
