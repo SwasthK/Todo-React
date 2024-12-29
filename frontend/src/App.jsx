@@ -1,69 +1,5 @@
-// import { useEffect, useState } from "react"
-// import Gettodo from "./compo/Gettodo"
-// export default function App() {
-//   const [todo, settodo] = useState([])
-
-//   const [addtodo, addnewtodo] = useState({
-//     title: "",
-//     description: ""
-//   })
-
-//   useEffect(() => {
-//     fetch('http://localhost:3000/mytodo/api/v1/todos')
-//       .then(async (response) => {
-//         const todos = await response.json()
-//         settodo(todos.todo)
-//       })
-//   }, [todo])
-
-//   async function pushtodo(e) {
-//     e.preventDefault()
-//     console.log(addtodo);
-//     console.log("reached");
-//     const ans = await fetch('http://localhost:3000/mytodo/api/v1/todos', {
-//       method: "POST",
-//       body: JSON.stringify(addtodo),
-//       headers: {
-//         "Content-Type": "application/json",
-//       }
-//     })
-
-//     if (ans.ok) {
-//       const newtodo = await ans.json()
-//       settodo([...todo, newtodo])
-//       console.log(newtodo);
-
-//     }
-//     console.log(addtodo);
-//     console.log("SUBMITTED");
-//   }
-
-//   return (
-//     <div >
-//       <h1>TODO LIST</h1>
-//       <div>
-//         <form action="" onSubmit={pushtodo}>
-//           <input type="text" placeholder="Enter todo title" onChange={(e) => {
-//             addnewtodo((prevTodo) => ({ ...prevTodo, title: e.target.value }));
-//             console.log(addtodo);
-//           }} />
-//           <input type="text" placeholder="Enter todo description" onChange={(e) => {
-//             addnewtodo((prevTodo) => ({ ...prevTodo, description: e.target.value }));
-//             console.log(addtodo);
-//           }} />
-//           <input type="submit" value="ADD TODO" />
-//         </form>
-//       </div>
-
-//       {todo.map(list => (
-//         <Gettodo key={list._id} list={list} />
-//       ))}
-//     </div>
-//   )
-// }
-
 import React, { useEffect, useState } from "react";
-import { Todolist } from "./compo/Todolist";
+import { Todolist } from "./component/Todolist";
 import axios from "axios";
 export default function App() {
   const [todos, settodos] = useState([]);
@@ -137,16 +73,15 @@ export default function App() {
           </button>
         </div>
 
-          {todos &&
-            todos.map((ele) => (
-              <Todolist
-                key={ele._id}
-                props={ele}
-                setupdate={setupdate}
-              ></Todolist>
-            ))}
-        </div>
-
+        {todos &&
+          todos.map((ele) => (
+            <Todolist
+              key={ele._id}
+              props={ele}
+              setupdate={setupdate}
+            ></Todolist>
+          ))}
+      </div>
     </>
   );
 }
